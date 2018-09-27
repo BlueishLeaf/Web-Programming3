@@ -1,0 +1,68 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-2'>Filter by:</div>
+      <form class="form-inline">
+          <div class="form-check mb-2 mr-sm-2">
+              <input class="form-check-input" type="checkbox" id="mensCheck" (click)="toggleCategory(0)">
+              <label class="form-check-label" for="mensCheck">
+                Men
+              </label>
+          </div>
+          <div class="form-check mb-2 mr-sm-2">
+              <input class="form-check-input" type="checkbox" id="womensCheck" (click)="toggleCategory(1)">
+              <label class="form-check-label" for="womensCheck">
+                Women
+              </label>
+          </div>
+          <div class="form-check mb-2 mr-sm-2">
+              <input class="form-check-input" type="checkbox" id="kidsCheck" (click)="toggleCategory(2)">
+              <label class="form-check-label" for="kidsCheck">
+                Kids
+              </label>
+          </div>
+      </form>
+    </div>
+    <div class='table-responsive'>
+      <table class='table'
+             *ngIf='bikes && bikes.length'>
+        <thead>
+          <tr>
+            <th>
+              <button class='btn btn-primary'
+                      (click)='toggleImage()'>
+                {{showImage ? 'Hide' : 'Show'}} Image
+              </button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let bike of filteredBikes'>
+            <td>
+              <img *ngIf='showImage'
+                   [src]='bike.imageUrl'
+                   [title]='bike.bikeName'
+                   [style.width.px]='imageWidth'
+                   [style.margin.px]='imageMargin'>
+            </td>
+            <td>{{ bike.bikeName }}</td>
+            <td>{{ bike.bikeCode | lowercase | convertToSpaces: '-' }}</td>
+            <td>{{ bike.releaseDate }}</td>
+            <td>{{ bike.category }}</td>
+            <td>{{ bike.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+            <td>{{ bike.starRating }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

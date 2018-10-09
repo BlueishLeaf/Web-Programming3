@@ -10,6 +10,8 @@ import { ConvertToSpacesPipe } from './convert-to-spaces.pipe';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductApiService } from './product-api.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NewProductComponent } from './new-product/new-product.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ProductApiService } from './product-api.service';
     ProductListComponent,
     ProductDetailComponent,
     StarComponent,
-    ConvertToSpacesPipe
+    ConvertToSpacesPipe,
+    NotFoundComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
@@ -25,8 +29,10 @@ import { ProductApiService } from './product-api.service';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
+      { path: 'add', component: NewProductComponent },
+      { path: 'products/:id', component: ProductDetailComponent },
       { path: '', redirectTo: 'products', pathMatch: 'full' },
-      { path: 'products/:id', component: ProductDetailComponent }
+      { path: '**', component: NotFoundComponent }
     ])
   ],
   exports: [

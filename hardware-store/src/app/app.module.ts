@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductApiService } from './product-api.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NewProductComponent } from './new-product/new-product.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { NewProductComponent } from './new-product/new-product.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
       { path: 'add', component: NewProductComponent },

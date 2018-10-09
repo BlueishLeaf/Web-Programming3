@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IProduct } from '../model/product';
+import { ProductApiService } from '../product-api.service';
 
 @Component({
   selector: 'app-new-product',
   templateUrl: './new-product.component.html',
   styleUrls: ['./new-product.component.css']
 })
-export class NewProductComponent implements OnInit {
-  product: IProduct
-  constructor() { }
+export class NewProductComponent {
+  product: IProduct;
 
-  ngOnInit() {
-  }
+  constructor(private _productService: ProductApiService) { }
 
-  onSubmit(form: NgForm) {
-    this.product = form.value as IProduct
-    console.log(this.product)
-  }
+  submitProduct(data): void {
+    this.product = data as IProduct;
+    this._productService.addProduct(this.product);
+   }
 
 }

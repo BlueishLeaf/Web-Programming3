@@ -32,6 +32,11 @@ export class ProductApiService {
     this.productsCollection.add(product);
   }
 
+  deleteProduct(Id: string): void {
+    console.log(Id);
+    this.productsCollection.doc(Id).delete();
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
     if (err.error instanceof ErrorEvent) {

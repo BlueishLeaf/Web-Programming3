@@ -32,6 +32,7 @@ export class BikeListComponent implements OnInit {
   }
 
   performFilter(): void {
+    
     this.selCat.forEach(category => {
       if (!category.selected && this.selectedCategories.includes(category.tag)) {
         this.selectedCategories.splice(this.selectedCategories.indexOf(category.tag));
@@ -39,13 +40,17 @@ export class BikeListComponent implements OnInit {
       } else if (category.selected) {
         this.selectedCategories.push(category.tag);
     }});
-    this.filteredBikes = [];
+    if (this.selectedCategories.length>0){
+      this.filteredBikes = [];
+    }
+    else{
+      this.filteredBikes = this.bikes;
+    }
     this.bikes.forEach(bike => {
       if (this.selectedCategories.includes(bike.category)) {
         this.filteredBikes.push(bike);
       }
     });
-    console.log(this.selectedCategories);
   }
 
   toggleImage (): void {

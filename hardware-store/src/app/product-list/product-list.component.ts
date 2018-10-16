@@ -44,6 +44,10 @@ export class ProductListComponent implements OnInit {
     this.showImage = !this.showImage;
   }
 
+  deleteProduct(id: number) {
+    this.productService.deleteProduct(id.toString());
+  }
+
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(
       products => {

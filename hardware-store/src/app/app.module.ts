@@ -7,14 +7,18 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { StarComponent } from './star/star.component';
 import { ConvertToSpacesPipe } from './convert-to-spaces.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductApiService } from './product-api.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { Ng6NotifyPopupModule } from 'ng6-notify-popup';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -24,26 +28,33 @@ import { environment } from 'src/environments/environment';
     StarComponent,
     ConvertToSpacesPipe,
     NotFoundComponent,
-    NewProductComponent
+    NewProductComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
+    Ng6NotifyPopupModule.forRoot(),
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
       { path: 'add', component: NewProductComponent },
       { path: 'products/:id', component: ProductDetailComponent },
-      { path: '', redirectTo: 'products', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent},
+      { path: 'register', component: RegisterComponent},
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', component: NotFoundComponent }
     ])
   ],
   exports: [
     StarComponent
   ],
-  providers: [ProductApiService],
+  providers: [ProductApiService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,8 +19,11 @@ export class ProductApiService {
   }
 
   getAllProducts(): Observable<IProduct[]> {
-    this.products = this.productsCollection.valueChanges();
-    this.products.subscribe(data => console.log(data), catchError(this.handleError));
+    this.products = this.productsCollection.snapshotChanges().pipe(map(actions => actions.map(a => {
+      const data = a.payload.doc.data() as IProduct;
+      const id = a.payload.doc.id;
+      return {id, ...data};
+    })));
     return this.products;
   }
 
@@ -33,7 +36,6 @@ export class ProductApiService {
   }
 
   deleteProduct(Id: string): void {
-    console.log(Id);
     this.productsCollection.doc(Id).delete();
   }
 

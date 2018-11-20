@@ -1,0 +1,48 @@
+<div class="container">
+  <div id="box">
+    <div id="heading">
+      <h1>Tom's Hardware</h1>
+    </div>
+    <div id="loginBox">
+      <form [formGroup]="loginForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" class="form-control" formControlName="username">
+              <div class="feedback" *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">
+                You need to enter a username
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" formControlName="password">
+              <div class="feedback" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+                Your password must be at least 8 characters long
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-block" [disabled]="loginForm.invalid" (click)="login()">Login</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 text-center">
+            <span style="font-size: 3em; color:  #3B5998;" (click)="facebookLogin()">
+              <i class="fab fa-facebook-square"></i>
+            </span>
+            <span style="font-size: 3em; color: #DB4437;" (click)="googleLogin()">
+              <i class="fab fa-google"></i>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

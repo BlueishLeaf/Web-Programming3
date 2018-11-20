@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { Ng6NotifyPopupModule } from 'ng6-notify-popup';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFireAuthModule,
     Ng6NotifyPopupModule.forRoot(),
     RouterModule.forRoot([
-      { path: 'products', component: ProductListComponent },
-      { path: 'add', component: NewProductComponent },
-      { path: 'products/:id', component: ProductDetailComponent },
+      { path: 'products', component: ProductListComponent, canActivate: [AuthGuardService] },
+      { path: 'add', component: NewProductComponent, canActivate: [AuthGuardService] },
+      { path: 'products/:id', component: ProductDetailComponent, canActivate: [AuthGuardService] },
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
       { path: '', redirectTo: 'login', pathMatch: 'full' },

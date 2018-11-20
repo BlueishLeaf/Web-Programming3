@@ -8,9 +8,11 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title = 'Tom\'s Hardware Store';
-  isLoggedIn = false;
 
-  constructor(private _auth: AuthService){
-    this.isLoggedIn = _auth.isLoggedIn();
+  constructor(private _auth: AuthService) {
+  }
+
+  logout() {
+    this._auth.doLogout();
   }
 }

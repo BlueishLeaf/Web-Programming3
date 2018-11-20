@@ -1,10 +1,11 @@
 <nav class='navbar navbar-expand navbar-light bg-light'>
   <a class='navbar-brand'>{{pageTitle}}</a>
   <ul class='nav nav-pills'>
-    <li><a class='nav-link' *ngIf="isLoggedIn" [routerLink]="['/products']">Product List</a></li>
-    <li><a class='nav-link' *ngIf="isLoggedIn" [routerLink]="['/add']">Add Product</a></li>
-    <li><a class='nav-link' *ngIf="!isLoggedIn" [routerLink]="['/login']">Login</a></li>
-    <li><a class='nav-link' *ngIf="!isLoggedIn" [routerLink]="['/register']">Register</a></li>
+    <li><a class='nav-link' *ngIf="_auth.isLoggedIn()" [routerLink]="['/products']">Product List</a></li>
+    <li><a class='nav-link' *ngIf="_auth.isLoggedIn()" [routerLink]="['/add']">Add Product</a></li>
+    <li><a class='nav-link' *ngIf="_auth.isLoggedIn()" href="#" (click)="logout()">Logout</a></li>
+    <li><a class='nav-link' *ngIf="!_auth.isLoggedIn()" [routerLink]="['/login']">Login</a></li>
+    <li><a class='nav-link' *ngIf="!_auth.isLoggedIn()" [routerLink]="['/register']">Register</a></li>
   </ul>
 </nav>
 <div class='container'>

@@ -10,26 +10,24 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  username: string;
+  email: string;
   password: string;
   constructor(private _fb: FormBuilder, private _auth: AuthService) { }
 
   ngOnInit() {
     this.loginForm = this._fb.group({
-      username: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-
-
     this.loginForm.valueChanges.subscribe(data => {
-      this.username = data.username;
+      this.email = data.email;
       this.password = data.password;
     });
   }
 
 
   login() {
-    this._auth.doLogin(this.username, this.password);
+    this._auth.doLogin(this.email, this.password);
   }
 
   facebookLogin() {

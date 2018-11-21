@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../model/product';
-import { ProductApiService } from '../product-api.service';
+import { ProductApiService } from '../services/product-api.service';
 
 @Component({
   selector: 'app-new-product',
@@ -8,13 +8,40 @@ import { ProductApiService } from '../product-api.service';
   styleUrls: ['./new-product.component.css']
 })
 export class NewProductComponent {
-  product: IProduct;
+  productId: number;
+  productName: string;
+  productCode: string;
+  releaseDate: string;
+  description: string;
+  price: number;
+  starRating: number;
+  imageUrl: string;
+  showDisplayClipartComponent: boolean;
 
   constructor(private _productService: ProductApiService) { }
 
-  submitProduct(data): void {
-    this.product = data as IProduct;
-    this._productService.addProduct(this.product);
+  showHideDisplayClipartComponent(): boolean {
+    this.showDisplayClipartComponent = !this.showDisplayClipartComponent;
+    return false;
+  }
+
+  addImageStringToFormTextBox(event): boolean {
+    this.imageUrl = event;
+    return false;
+  }
+
+  submitProduct(): void {
+    const product: IProduct = {
+      productId: this.productId,
+      productName: this.productName,
+      productCode: this.productCode,
+      releaseDate: this.releaseDate,
+      description: this.description,
+      price: this.price,
+      starRating: this.starRating,
+      imageUrl: this.imageUrl
+    };
+    this._productService.addProduct(product);
    }
 
 }

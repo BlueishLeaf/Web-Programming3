@@ -28,10 +28,14 @@
       <label for="rating">Product Star Rating</label>
       <input type="text" class="form-control" name="starRating" id="rating" [(ngModel)]="starRating">
     </div>
-    <div class="form-group">
-      <label for="image">Product Image URL</label>
-      <input type="text" class="form-control" name="imageUrl" id="image" [(ngModel)]="imageUrl"> 
+    <div class="form-group" fxLayout="row" fxLayoutGap="20px">
+      <label for="image">Product Image</label>
+      <input fxFlex="60" type="text" class="form-control" name="imageUrl" id="image" [(ngModel)]="imageUrl"> 
+      <button fxFlwx="20" mat-raised-button color="primary" type="submit" (click)="showHideDisplayClipartComponent()">Find Images</button>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        <app-display-clipart (addImageStringEE)="addImageStringToFormTextBox($event)" *ngIf="showDisplayClipartComponent" [imageStr]="imageStr"></app-display-clipart>
+    </div>
+    <button mat-raised-button color="primary" type="submit" (click)="addProduct()">Submit</button>
  </form>
 </div>

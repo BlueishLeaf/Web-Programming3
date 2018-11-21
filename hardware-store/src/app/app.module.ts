@@ -9,7 +9,7 @@ import { StarComponent } from './star/star.component';
 import { ConvertToSpacesPipe } from './convert-to-spaces.pipe';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductApiService } from './product-api.service';
+import { ProductApiService } from './services/product-api.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { AngularFireModule } from '@angular/fire';
@@ -19,7 +19,9 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { Ng6NotifyPopupModule } from 'ng6-notify-popup';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AuthGuardService } from './auth-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { DisplayClipartComponent } from './display-clipart/display-clipart.component';
+import { MatButtonModule, MatCardModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AuthGuardService } from './auth-guard.service';
     NotFoundComponent,
     NewProductComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DisplayClipartComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,8 @@ import { AuthGuardService } from './auth-guard.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    MatButtonModule,
+    MatCardModule,
     Ng6NotifyPopupModule.forRoot(),
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent, canActivate: [AuthGuardService] },

@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   password: string;
   constructor(private _fb: FormBuilder, private _auth: AuthService) { }
 
+  // Using Angular reactive forms
   ngOnInit() {
     this.loginForm = this._fb.group({
       email: ['', [Validators.required]],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../model/product';
 import { ProductApiService } from '../services/product-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-product',
@@ -18,18 +19,21 @@ export class NewProductComponent {
   imageUrl: string;
   showDisplayClipartComponent: boolean;
 
-  constructor(private _productService: ProductApiService) { }
+  constructor(private _productService: ProductApiService, private _router: Router) { }
 
+  // Toggle clipart component
   showHideDisplayClipartComponent(): boolean {
     this.showDisplayClipartComponent = !this.showDisplayClipartComponent;
     return false;
   }
 
+  // Assign string from event to imageUrl
   addImageStringToFormTextBox(event): boolean {
     this.imageUrl = event;
     return false;
   }
 
+  // Submit form
   submitProduct(): void {
     const product: IProduct = {
       productId: this.productId,
@@ -42,6 +46,8 @@ export class NewProductComponent {
       imageUrl: this.imageUrl
     };
     this._productService.addProduct(product);
+    // Redirect to products page
+    this._router.navigate(['/products']);
    }
 
 }

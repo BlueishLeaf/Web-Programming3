@@ -10,6 +10,7 @@ export class AuthGuardService {
 
   constructor(private _auth: AuthService, private _router: Router) { }
 
+  // Check if user is logged in
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this._auth.isLoggedIn()) {
       return true;

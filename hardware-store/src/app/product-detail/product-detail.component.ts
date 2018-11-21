@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductApiService) {
   }
 
+  // Fetch ID from route
   ngOnInit() {
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
@@ -27,6 +28,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+  // Fetch individual product
   getProduct(id: number) {
     this.productService.getProductById(id).subscribe(
       product => this.product = product,

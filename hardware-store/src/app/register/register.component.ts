@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   passwordRepeat: string;
   constructor(private fb: FormBuilder, private _auth: AuthService) {}
 
+  // Set up reactive form
   ngOnInit() {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('passwordRepeat');
   }
 
+  // Validate passwords and register user
   registerUser() {
     if (this.password === this.passwordRepeat) {
       this.formPasswordRepeat.setErrors(null);

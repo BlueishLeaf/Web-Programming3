@@ -18,6 +18,7 @@ export class ProductApiService {
     this.productsCollection = _afs.collection<IProduct>('products');
   }
 
+  // Fetch all products from firestore collection
   getAllProducts(): Observable<IProduct[]> {
     this.products = this.productsCollection.snapshotChanges().pipe(map(actions => actions.map(a => {
       const data = a.payload.doc.data() as IProduct;
@@ -27,7 +28,7 @@ export class ProductApiService {
     return this.products;
   }
 
-  getProductById(id: number): Observable<IProduct | undefined> {
+  getProductById(id: number): Observable<IProduct> {
     return this.getAllProducts().pipe(map((products: IProduct[]) => products.find(p => p.productId === id)));
   }
 

@@ -14,6 +14,7 @@ export class ProductListComponent implements OnInit {
   showImage = false;
   errorMessage = '';
 
+  // Controls the filter box
   _listFilter = '';
   get listFilter(): string {
     return this._listFilter;
@@ -30,10 +31,18 @@ export class ProductListComponent implements OnInit {
 
   }
 
-  onRatingClicked(message: string): void {
-    this.pageTitle = 'Product List: ' + message;
+  // Fetch all products
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe(
+      products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error => this.errorMessage = <any>error
+    );
   }
 
+  // Filters products by name
   performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.products.filter((product: IProduct) =>
@@ -48,13 +57,4 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProduct(id.toString());
   }
 
-  ngOnInit(): void {
-    this.productService.getAllProducts().subscribe(
-      products => {
-        this.products = products;
-        this.filteredProducts = this.products;
-      },
-      error => this.errorMessage = <any>error
-    );
-  }
 }
